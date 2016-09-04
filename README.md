@@ -13,7 +13,9 @@ Raspi i2c 4x20 monitor python script
 1. On raspberry pi terminal or ssh connect to raspberry pi type <b>sudo raspi-config</b> > Advanced Options > I2C > Enable
 <h5>Note: I use raspbian OS for my code, other OS I haven't try.</h5>
 </br>
-2. The Setup you can visit this page http://hardware-libre.fr/2014/03/en-raspberry-pi-using-a-4x20-characters-display/
+2. The Setup you can visit this 2 page 
+   </br>https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c#installing-kernel-support-manually
+   </br>http://hardware-libre.fr/2014/03/en-raspberry-pi-using-a-4x20-characters-display/
 3. Auto startup this code? Just type <b>"sudo nano /etc/rc.local"</b> insert the command <b>"sudo python &lt;you script location&gt;"</b> before <b>"exit 0"</b>.
 </br>
 </br><b>ip.py</b> = Get local network IP. (Modem local IP)&lt;Class file&gt;

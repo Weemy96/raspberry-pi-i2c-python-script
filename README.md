@@ -2,7 +2,7 @@
 Raspi i2c 4x20 monitor python script
 </br>
 </br>
-<h3>How to use?</h3>
+###How to use?
 0. i2c screen connect to gpio like image below:
 </br>
 <img src="https://github.com/Weemy96/raspberry-pi-i2c-python-script/raw/master/rpi-i2c-pins.png"/>
@@ -19,12 +19,20 @@ Raspi i2c 4x20 monitor python script
 </br>
 3. Request <code>psutil</code>
 <br>
-<code>sudo apt install gcc python-dev python-pip
-pip install psutil</code>
+```sh
+sudo apt install gcc python-dev python-pip
+pip install psutil
+```
 </br>
 4. Auto startup this code? Just type copy or move the startup script "<b>i2c_monitor</b>" to <b>/etc/init.d/</b>
-</br> after give the execute codemission </br><code>sudo chmod 755 /etc/init.d/i2c_monitor</code></br> then try to run it <code>sudo /etc/init.d/i2c_monitor start</code>
-	</br>to stop it </br><code>sudo /etc/init.d/i2c_monitor stop</code>
+</br> after give the execute codemission </br><code>sudo chmod 755 /etc/init.d/i2c_monitor</code></br> then try to run it </br>
+```sh
+sudo /etc/init.d/i2c_monitor start
+```
+	</br>to stop it </br>
+    ```sh
+    sudo /etc/init.d/i2c_monitor stop
+    ```
 </br>
 </br><b>ip.py</b> = Get local network IP. (Modem local IP)&lt;Class file&gt;
 </br><b>uptime.py</b> = Get uptime. &lt;Class file&gt;

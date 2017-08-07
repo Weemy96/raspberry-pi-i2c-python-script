@@ -4,6 +4,7 @@ import ram_d
 #import ip """find local ip address"""
 import time
 import os
+import psutil
 import uptime
 
 ##Get CPU Temperature
@@ -11,25 +12,11 @@ def temperature():
     res = os.popen('vcgencmd measure_temp').readline()
     return float(res[res.index('=') + 1:res.rindex("'")])
 
-##Get Internet Speed
-#Wifi
+##Get Internet Speed in bytes
 def speed():
-	##If use cable pls change 'wlan0' to 'eth0'
-	spe = os.popen('cat /sys/class/net/wlan0/statistics/rx_bytes')
-#	spee = os.popen('cat /sys/class/net/wlan0/statistics/rx_bytes')
-	sp = spe.read()
-	#sp_w = spee.read()
-	sp_st = float(sp)# + float(sp_w)##now auto calulate internet speed not need set-up eth0 or wlan0
-	return float(sp_st)
+	spe=psutil.net_io_counters().bytes_recv
+	return float(spe)
 
-#Eth0
-#def eth_speed():
-#	spe_eth = os.popen('cat /sys/class/net/eth0/statistics/rx_bytes')
-#	sp_eth = spe_eth.read()
-#	#sp_w = spee.read()
-#	sp_st_eth = float(sp_eth)# + float(sp_w)##now auto calulate internet speed not need set-up eth0 or wlan0
-#	return float(sp_st_eth)
-	
 # lcd start
 lcd = lcddriver.lcd()
 
@@ -66,35 +53,17 @@ while True:
 	c_sp = spd - spd_c
 	spd_c = spd
 	
-	if c_sp < 1024:
-		RX_C = c_sp
-		speed_dsp = "Wifi: %9.2f"%RX_C+" b/s"
+	if (c_sp > 1048576):
+		rx=c_sp/1048576;
+		speed_dsp = "NSpeed: %7.2f"%rx+" MB/s"
 
-	elif c_sp >= 1024 and c_sp < 1024000:
-		RX_C = c_sp/1024
-		speed_dsp = "Wifi: %8.2f"%RX_C+" kb/s"
+	elif (c_sp >= 1024):
+		rx=c_sp/1024
+		speed_dsp = "NSpeed: %7.2f"%rx+" kB/s"
 
 	else:
-		RX_C = c_sp/(1024*1024)
-		speed_dsp = "Wifi: %8.2f"%RX_C+" MB/s"
+		speed_dsp = "NSpeed: %8.2f"%c_sp+" B/s"
 		
-## Internet Speed display (Eth0)
-#	spd_eth = eth_speed()
-#	c_sp_eth = spd_eth - spd_c_eth
-#	spd_c_eth = spd_eth
-#	
-#	if c_sp_eth < 1024:
-#		RX_C_eth = c_sp_eth
-#		speed_dsp_eth = "Eth0: %9.2f"%RX_C_eth+" b/s"
-#
-#	elif c_sp_eth >= 1024 and c_sp_eth < 1024000:
-#		RX_C_eth = c_sp_eth/1024
-#		speed_dsp_eth = "Eth0: %8.2f"%RX_C_eth+" kb/s"
-#
-#	else:
-#		RX_C_eth = c_sp_eth/(1024*1024)
-#		speed_dsp_eth = "Eth0: %8.2f"%RX_C_eth+" MB/s"
-
 ##get uptime
 	get_uptime=uptime.uptime()
 ##i2c screen display
@@ -105,5 +74,5 @@ while True:
 	lcd.lcd_display_string(get_uptime, 4)
 	
 	#maybe 10~30% +-
-	time.sleep(0.35)
+	time.sleep(0.3)
 

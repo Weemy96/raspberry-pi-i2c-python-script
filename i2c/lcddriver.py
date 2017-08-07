@@ -67,6 +67,7 @@ class lcd:
       sleep(0.2)
 
    # clocks EN to latch command
+   #if you need turn off the back light, just change "LCD_BACKLIGHT" to "LCD_NOBACKLIGHT"
    def lcd_strobe(self, data):
       self.lcd_device.write_cmd(data | En | LCD_BACKLIGHT)
       sleep(.0005)

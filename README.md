@@ -20,17 +20,21 @@ Raspi i2c 4x20 monitor python script
 </br>
 </br>
 3. Request <code>psutil</code>
+
 ```sh
 sudo apt install gcc python-dev python-pip
 pip install psutil
 ```
+
 </br>
 </br>
 4. Auto startup this code? Just type copy or move the startup script "<b>i2c_monitor</b>" to <b>/etc/init.d/</b>
 </br> after give the execute codemission.</br>
+
 ```sh
 sudo chmod 755 /etc/init.d/i2c_monitor
 ```
+
 </br>
 
 ### Run

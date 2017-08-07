@@ -18,11 +18,14 @@ Raspi i2c 4x20 monitor python script
    </br>https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c#installing-kernel-support-manually
    </br>http://hardware-libre.fr/2014/03/en-raspberry-pi-using-a-4x20-characters-display/
 </br>
+</br>
 3. Request <code>psutil</code>
 ```sh
 sudo apt install gcc python-dev python-pip
 pip install psutil
 ```
+</br>
+</br>
 4. Auto startup this code? Just type copy or move the startup script "<b>i2c_monitor</b>" to <b>/etc/init.d/</b>
 </br> after give the execute codemission.</br>
 ```sh

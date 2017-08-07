@@ -46,6 +46,7 @@ sudo /etc/init.d/i2c_monitor stop
 </br><b>ram_d.py</b> = Get Ram information. &lt;Class file&gt;
 </br><b>monitor.py</b> =Main script
 </br>
+</br>
 Copyright © 2017 Weemy96 </br>
 This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,

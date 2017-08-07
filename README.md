@@ -30,8 +30,8 @@ pip install psutil
 sudo chmod 755 /etc/init.d/i2c_monitor
 ```
 </br>
-### Run</br>
 
+### Run
 ```sh
 sudo /etc/init.d/i2c_monitor start
 ```

@@ -1,0 +1,27 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          i2c
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start i2c
+### END INIT INFO
+
+case "$1" in
+  start)
+   echo "Staing i2c screen"
+   sudo python /opt/i2c/monitor.py
+   ;;
+  stop)
+   echo "Stoping i2c screen"
+   #sudo kill `ps -ef|grep 'python /home/pi/i2c' | grep -v "grep"|awk '{print $2}'`
+   sudo killall python
+   ;;
+  *)
+   echo "Usage: /etc/init.d/i2c_monitor {start|stop}"
+   exit 1
+   ;;
+esac
+
+exit 0;

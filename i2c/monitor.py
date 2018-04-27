@@ -1,7 +1,7 @@
 ## loading the class
 import lcddriver
 import ram_d
-#import ip """find local ip address"""
+import ip
 import time
 import os
 import psutil
@@ -32,7 +32,7 @@ spd_c_eth = 0
 while True:
 	##CPU Temperature display
 	out_c = temperature()
-	outstring ="CPU TEMP: "+str(out_c)+"'C"
+	row_1 ="CPU TEMP: "+str(out_c)+"'C"
 
 	##FREE Ram display
 	RAM_stats = ram_d.get()
@@ -40,13 +40,17 @@ while True:
 	RAM_used = int(RAM_stats[1])
 	RAM_free = int(RAM_stats[2])
 	if RAM_free >= 100:
-		ram_f = "Free RAM: %2d"%RAM_free+"/"+str(RAM_total)+" MB"
+		row_2 = "Free RAM: %2d"%RAM_free+"/"+str(RAM_total)+" MB"
 	else:
-		ram_f = "Free RAM:  %2d"%RAM_free+"/"+str(RAM_total)+" MB"
+		row_2 = "Free RAM:  %2d"%RAM_free+"/"+str(RAM_total)+" MB"
 
 ##IP display
-#	ipaddr = ip.s.getsockname()[0]
-#	ip_d = "IP: "+str(ipaddr)
+	space=""
+	ipaddr = ip.get_ip()
+	if(ipaddr == "Not Connection"):
+		row_4 = "IP: %2s"%space+str(ipaddr)
+	else:
+		row_4 = "IP: %2s"%space+str(ipaddr)+"%3s"%space
 
 ## Internet Speed display (Wifi)
 	spd = speed()
@@ -55,24 +59,24 @@ while True:
 	
 	if (c_sp > 1048576):
 		rx=c_sp/1048576;
-		speed_dsp = "NSpeed: %7.2f"%rx+" MB/s"
+		row_3 = "NSpeed: %7.2f"%rx+" MB/s"
 
 	elif (c_sp >= 1024):
 		rx=c_sp/1024
-		speed_dsp = "NSpeed: %7.2f"%rx+" kB/s"
+		row_3 = "NSpeed: %7.2f"%rx+" kB/s"
 
 	else:
-		speed_dsp = "NSpeed: %8.2f"%c_sp+" B/s"
+		row_3 = "NSpeed: %8.2f"%c_sp+" B/s"
 		
 ##get uptime
-	get_uptime=uptime.uptime()
+	#row_4=uptime.uptime()
 ##i2c screen display
 
-	lcd.lcd_display_string(outstring, 1)
-	lcd.lcd_display_string(ram_f, 2)
-	lcd.lcd_display_string(speed_dsp, 3)
-	lcd.lcd_display_string(get_uptime, 4)
-	
+	lcd.lcd_display_string(row_1, 1)
+	lcd.lcd_display_string(row_2, 2)
+	lcd.lcd_display_string(row_3, 3)
+	lcd.lcd_display_string(row_4, 4)
+
 	#maybe 10~30% +-
 	time.sleep(0.3)
 

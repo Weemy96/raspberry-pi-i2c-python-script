@@ -1,3 +1,4 @@
+#!/usr/bin/python
 ## loading the class
 import lcddriver
 import ram_d
@@ -19,10 +20,10 @@ def speed():
 
 # lcd start
 lcd = lcddriver.lcd()
-
 # this command clears the display (captain obvious)
 lcd.lcd_clear()
-
+not_conn = False
+ip_addr = "";
 # now we can display some characters (text, line)
 
 ##speed starting
@@ -49,8 +50,15 @@ while True:
 	ipaddr = ip.get_ip()
 	if(ipaddr == "Not Connection"):
 		row_4 = "IP: %2s"%space+str(ipaddr)
+                not_conn=True
 	else:
-		row_4 = "IP: %2s"%space+str(ipaddr)+"%3s"%space
+                if(not_conn or (ip_addr != str(ipaddr))):
+                       lcd.lcd_clear()
+                       row_4 = "IP: %2s"%space+str(ipaddr)
+                       not_conn=False
+                       ip_addr = str(ipaddr)
+                else:
+		       row_4 = "IP: %2s"%space+str(ipaddr)
 
 ## Internet Speed display (Wifi)
 	spd = speed()
@@ -71,12 +79,11 @@ while True:
 ##get uptime
 	#row_4=uptime.uptime()
 ##i2c screen display
-
 	lcd.lcd_display_string(row_1, 1)
 	lcd.lcd_display_string(row_2, 2)
 	lcd.lcd_display_string(row_3, 3)
 	lcd.lcd_display_string(row_4, 4)
 
-	#maybe 10~30% +-
-	time.sleep(0.3)
+	#maybe in 0.3 - 0.5s +- continue next refresh
+	time.sleep(0.5)
 

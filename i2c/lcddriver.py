@@ -46,6 +46,9 @@ LCD_5x8DOTS = 0x00
 LCD_BACKLIGHT = 0x08
 LCD_NOBACKLIGHT = 0x00
 
+## light on/off flags LCD_ISLIGHT = [LCD_BACKLIGHT]/[LCD_NOBACKLIGHT] (select one)
+LCD_ISLIGHT = LCD_BACKLIGHT
+
 En = 0b00000100 # Enable bit
 Rw = 0b00000010 # Read/Write bit
 Rs = 0b00000001 # Register select bit
@@ -67,15 +70,14 @@ class lcd:
       sleep(0.2)
 
    # clocks EN to latch command
-   #if you need turn off the back light, just change "LCD_BACKLIGHT" to "LCD_NOBACKLIGHT"
    def lcd_strobe(self, data):
-      self.lcd_device.write_cmd(data | En | LCD_BACKLIGHT)
+      self.lcd_device.write_cmd(data | En | LCD_ISLIGHT)
       sleep(.0005)
-      self.lcd_device.write_cmd(((data & ~En) | LCD_BACKLIGHT))
+      self.lcd_device.write_cmd(((data & ~En) | LCD_ISLIGHT))
       sleep(.0001)
 
    def lcd_write_four_bits(self, data):
-      self.lcd_device.write_cmd(data | LCD_BACKLIGHT)
+      self.lcd_device.write_cmd(data | LCD_ISLIGHT)
       self.lcd_strobe(data)
 
    # write a command to lcd
